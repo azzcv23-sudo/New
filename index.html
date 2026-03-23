@@ -137,28 +137,33 @@
 
     </div>
 
-    <audio id="musica" loop>
+    <audio id="musica" loop preload="auto">
         <source src="Rat.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        const musica = document.getElementById("musica");
-        const carta = document.getElementById("miCarta");
+    // 1. Primero definimos los elementos (Esto es lo que falta)
+    const musica = document.getElementById("musica");
+    const carta = document.getElementById("miCarta");
 
-        function activarTodo() {
-            if (musica.paused) {
-                musica.play();
-                carta.style.display = "block"; // Muestra la carta
-            } else {
-                musica.pause();
-                carta.style.display = "none"; // Oculta la carta si ya sonaba
-            }
-        }
+    // 2. Luego la función para activar todo
+    function activarTodo() {
+        // Sin el "const" adelante, solo llamamos a la función
+        musica.play().then(() => {
+            console.log("Reproduciendo...");
+        }).catch(error => {
+            console.log("Error en móvil:", error);
+        });
 
-        function cerrarCarta() {
+        if (carta.style.display === "block") {
             carta.style.display = "none";
+            musica.pause();
+        } else {
+            carta.style.display = "block";
         }
-    </script>
+    }
+</script>
+       </script>
 
 </body>
 </html>
