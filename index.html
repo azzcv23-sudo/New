@@ -149,40 +149,37 @@
 
     <button class="boton" onclick="activarTodo()">PUSH HERE</button>
 
-    <div id="miCarta" class="carta-emergente">
-        <span class="boton-cerrar" onclick="cerrarCarta()">×</span>
-        <h2>Bienvenido, te estaba esperando.</h2>
-        <p>Es bueno tenerte de regreso, ya puedes cerrar los ojos y despertar. Esto es un sueño lúcido, repito, esto es un sueño lúcido. Tienes que despertar, te extrañan en casa.
-</p>
+<div id="miCarta" class="carta-emergente" style="display: none;">
+    <span class="boton-cerrar" onclick="cerrarCarta()">×</span>
+    <h2>Bienvenido, te estaba esperando.</h2>
+    <p>Es bueno tenerte de regreso, ya puedes cerrar los ojos y despertar. Esto es un sueño lúcido, repito, esto es un sueño lúcido. Tienes que despertar, te extrañan en casa.</p>
+</div>
 
-    </div>
+<audio id="musica" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <audio id="musica" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-    // 1. Primero definimos los elementos (Esto es lo que falta)
+<script>
+    // 1. Definimos los elementos globalmente
     const musica = document.getElementById("musica");
     const carta = document.getElementById("miCarta");
 
-    // 2. Luego la función para activar todo
+    // 2. Función principal
     function activarTodo() {
-        // Sin el "const" adelante, solo llamamos a la función
-        musica.play().then(() => {
-            console.log("Reproduciendo...");
-        }).catch(error => {
-            console.log("Error en móvil:", error);
-        });
+        // Reproducir música (maneja la promesa para evitar errores de navegador)
+        musica.play()
+            .then(() => console.log("Reproduciendo..."))
+            .catch(error => console.log("Error al reproducir:", error));
 
-        if (carta.style.display === "block") {
-            carta.style.display = "none";
-            musica.pause();
-        } else {
-            carta.style.display = "block";
-        }
- } }
-    </script>
+        // Mostrar la carta
+        carta.style.display = "block";
+    }
 
+    // 3. Función para cerrar (que faltaba en tu script)
+    function cerrarCarta() {
+        carta.style.display = "none";
+        musica.pause(); // Opcional: pausa la música al cerrar
+    }
+</script>
 </body>
 </html>
